@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from AppCoder.views import mostrar_mi_template, mostrar_mis_tareas
+from AppCoder.views import (mostrar_mi_template, mostrar_mis_tareas, mostrar_personas, crear_persona)
 from SocialTravel.views import index
 
 urlpatterns = [
@@ -23,5 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('mi-template/<nombre>/<apellido>', mostrar_mi_template),
     path('mis-tareas/<criterio>', mostrar_mis_tareas, name="mis tareas"),
+    path('personas', mostrar_personas, name="personas"),
+    path('personas/create', crear_persona, name="personas-create"),
     
 ]

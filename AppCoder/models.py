@@ -13,4 +13,14 @@ class Tarea(models.Model):
 
     def __str__(self):
         return f"{self.id} - {self.nombre}"
-    
+
+#Clase 20: utilizo los siguientes datos para el forms.py:
+
+class Persona(models.Model):
+    nombre = models.TextField(max_length=100)
+    apellido = models.TextField(max_length=100)
+    fecha_nacimiento = models.DateField()
+
+def __str__(self):
+    return f"{self.id} - {self.nombre} - {self.apellido}"
+

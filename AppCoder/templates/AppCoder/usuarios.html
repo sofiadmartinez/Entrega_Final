@@ -1,0 +1,20 @@
+{% extends 'AppCoder/base.html' %}
+{% block titulo %} Ingrese sus datos personales para realizar la compra {% endblock %}
+
+{% block listado %}
+
+
+<form action="{% url 'envios-create' %}" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Aceptar">
+</form>
+
+<ul>
+    {% for usuario in usuarios %}
+       <li> {{usuario}}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+{% block title %} Total: {{total_usuarios}} {% endblock %}

@@ -1,47 +1,62 @@
 from django.shortcuts import render
-from django.db import models #esto es de la clase 19, parte modelos
-from AppCoder.models import Tarea, Persona
-from AppCoder.forms import PersonaForm #clase 20
+from django.db import models 
+from AppCoder.models import Articulo, Usuario, Envio
+from AppCoder.forms import UsuarioForm, ArticuloForm, EnvioForm
 
-def mostrar_mi_template(request, nombre, apellido):
-    context={ 
-        "nombre":nombre,
-        "apellido":apellido,
-        "notas":[5,6,7,8,9,10]
-    }
-    return render(request,"AppCoder/index.html", context)
+def base(request):
+    return render(request, "AppCoder/base.html")
 
-#aca empieza la parte del video de la clase 19, modelos
-
-def mostrar_mis_tareas(request,criterio):
-    tareas = Tarea.objects.filter(nombre=criterio).all()
-    return render(request,"AppCoder/index.html", {"tareas":tareas})
-
-#Clase 20:
-
-def mostrar_personas(request):
-    personas = Persona.objects.all()
-    total_personas = len(personas)
-    context= {
-        "personas": personas,
-        "total_personas": total_personas,
-        "form": PersonaForm(),
-    }
-    return render(request,"AppCoder/personas.html", context)
-
-def crear_persona(request):
-    f = PersonaForm(request.POST)
-    personas = Persona.objects.all()
-    total_personas = len(personas)
+def crear_usuario(request):
+    f = UsuarioForm(request.POST)
+    usuarios = Usuario.objects.all()
+    total_usuarios = len(usuarios)
     context={
-        "personas": personas,
-        "total_personas": total_personas,
+        "usuarios": usuarios,
+        "total_usuarios": total_usuarios,
         "form": f,
     }
 
+    if f.is_valid():
+        Usuario(f.data["nombre"], f.data["apellido"], f.data["dni"]).save()
     
+    return render(request, "AppCoder/usuarios.html", context)
+
+
+def cargar_articulos(request):
+    f = ArticuloForm(request.POST)
+    articulos = Articulo.objects.all()
+    total_articulos = len(articulos)
+    context={
+        "articulos": articulos,
+        "total_articulos": total_articulos,
+        "form": f,
+    }
 
     if f.is_valid():
-        Persona(f.data["nombre"], f.data["apellido"], f.data["fecha_nacimiento"]).save()
+        Articulo(f.data["producto"], f.data["marca"], f.data["cantidad"]).save()
+
+    return render(request, "AppCoder/articulos.html", context)
+
+
+def envio_realizado(request):
+    f = EnvioForm(request.POST)
+    envios = Envio.objects.all()
+    total_envios = len(envios)
+    context = {
+        "envios": envios,
+        "total_envios": total_envios,
+        "form": f,
+    }
+
+    if f.is_valid():
+        Envio(f.data["direccion"], f.data ["ciudad"], f.data ["provincia"], f.data ["cp"]).save()
     
-    return render(request, "AppCoder/personas.html",context)
+    return render(request, "AppCoder/envios.html", context)
+
+
+#def busqueda(request):
+#    return render(request, "AppCoder/busqueda.html")
+
+#def buscar(request):
+#    respuesta = f"Estos son los resultados del usuario"
+#    return HttpResponse(respuesta)

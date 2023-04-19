@@ -1,26 +1,27 @@
 from django.db import models
 
-#Aca vamos a empezar con la parte de modelos, que se encuentra en la clase 19:
-
-class Tarea(models.Model):
-    nombre = models.TextField(max_length=100)
-    estado = models.TextField(max_length=100, default="por hacer")
-    creado_el = models.DateTimeField(auto_now_add=True)
-    modificado_el = models.DateTimeField(auto_now=True)
-
-    def terminar(self):
-        self.estado = "terminado"
-
-    def __str__(self):
-        return f"{self.id} - {self.nombre}"
-
-#Clase 20: utilizo los siguientes datos para el forms.py:
-
-class Persona(models.Model):
+class Usuario(models.Model):
     nombre = models.TextField(max_length=100)
     apellido = models.TextField(max_length=100)
-    fecha_nacimiento = models.DateField()
+    dni = models.TextField(max_length=50)
 
-def __str__(self):
-    return f"{self.id} - {self.nombre} - {self.apellido}"
+    def __str__(self):
+        return f"{self.nombre} - {self.apellido}"
 
+
+class Articulo(models.Model):
+    producto = models.TextField(max_length=100)
+    marca = models.TextField(max_length=100, default="samsung")
+    cantidad = models.TextField(max_length=100, default="1")
+ 
+    def __str__(self):
+        return f"{self.producto} - {self.marca} - {self.cantidad}"
+
+
+class Envio(models.Model):
+    direccion = models.TextField(max_length=100)
+    ciudad = models.TextField(max_length=100, default=" ")
+    provincia = models.TextField(max_length=100, default=" ")
+    cp = models.TextField(max_length=100, default=" ")
+    def _str__(self):
+        return f"{self.direccion} - {self.ciudad} - {self.provincia} - {self.cp}"

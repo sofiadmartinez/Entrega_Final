@@ -1,5 +1,7 @@
 from django.contrib import admin
-from AppCoder.models import Persona
-from AppCoder.views import PersonaForm
+from AppCoder.models import Articulo, Usuario, Envio
+from AppCoder.forms import ArticuloForm, UsuarioForm, EnvioForm
 
-admin.site.register(Persona)
+admin.site.register(Usuario)
+admin.site.register(Articulo)
+admin.site.register(Envio)

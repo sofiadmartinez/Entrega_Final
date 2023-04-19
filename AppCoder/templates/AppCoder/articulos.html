@@ -1,0 +1,20 @@
+{% extends 'AppCoder/base.html' %}
+{% block titulo %} Ingrese los articulos que quiere agregar al carrito de compras {% endblock %}
+
+{% block listado %}
+
+
+<form action="{% url 'articulos-create' %}" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Agregar">
+</form>
+
+<ul>
+    {% for articulo in articulos %}
+       <li> {{articulo}}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+{% block title %} Total: {{total_articulos}} {% endblock %}

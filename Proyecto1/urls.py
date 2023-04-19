@@ -15,15 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from AppCoder.views import (mostrar_mi_template, mostrar_mis_tareas, mostrar_personas, crear_persona)
-from SocialTravel.views import index
+from AppCoder.views import (cargar_articulos, crear_usuario, envio_realizado, base)
+
+
 
 urlpatterns = [
-    path('',index),
+    path('',base),
     path('admin/', admin.site.urls),
-    path('mi-template/<nombre>/<apellido>', mostrar_mi_template),
-    path('mis-tareas/<criterio>', mostrar_mis_tareas, name="mis tareas"),
-    path('personas', mostrar_personas, name="personas"),
-    path('personas/create', crear_persona, name="personas-create"),
+    path('articulos/create', cargar_articulos, name="articulos-create"),
+    path('usuarios/create', crear_usuario, name="usuarios-create"),
+    path('envios/create', envio_realizado, name="envios-create"),
     
-]
+    ]

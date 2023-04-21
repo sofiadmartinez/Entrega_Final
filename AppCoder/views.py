@@ -21,21 +21,44 @@ def crear_usuario(request):
     
     return render(request, "AppCoder/usuarios.html", context)
 
-
 def cargar_articulos(request):
-    f = ArticuloForm(request.POST)
+    f= ArticuloForm(request.POST)
+    if f.is_valid():
+        data = f.cleaned_data
+        articulo = Articulo(
+            producto= data["producto"],
+            marca= data["marca"],
+            cantidad= data["cantidad"]
+        )
+        articulo.save()
+        return redirect("articulos-create")
+    
+    f= ArticuloForm()
     articulos = Articulo.objects.all()
     total_articulos = len(articulos)
     context={
         "articulos": articulos,
         "total_articulos": total_articulos,
-        "form": f,
+        "form": f
     }
 
-    if f.is_valid():
-        Articulo(f.data["producto"], f.data["marca"], f.data["cantidad"]).save()
-
     return render(request, "AppCoder/articulos.html", context)
+    
+# def cargar_articulos(request):
+#     f = ArticuloForm(request.POST)
+#     articulos = Articulo.objects.all()
+#     total_articulos = len(articulos)
+#     context={
+#         "articulos": articulos,
+#         "total_articulos": total_articulos,
+#         "form": f,
+#     }
+
+#     if f.is_valid():
+#         Articulo(f.data["producto"], f.data["marca"], f.data["cantidad"]).save()
+
+#     return render(request, "AppCoder/articulos.html", context)
+
 
 
 def envio_realizado(request):

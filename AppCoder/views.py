@@ -17,28 +17,12 @@ def crear_usuario(request):
         "total_usuarios": total_usuarios,
         "form": f,
     }
-   
+
     if f.is_valid():
-        Usuario(nombre=f.data["nombre"], apellido=f.data["apellido"], dni=f.data["dni"]).save()
+        Usuario(f.data["nombre"], f.data["apellido"], f.data["dni"]).save()
     
     return render(request, "AppCoder/usuarios.html", context)
 
-#Asi esta ahora: De esta forma si yo pongo un valor invalido me va a tirar en el formulario un cartel que dice que ponga un valor valido
-# def crear_usuario(request):
-#      f = UsuarioForm(request.POST)
-#      context = {
-#         "form": f
-#      }
-#      if f.is_valid():
-#          Usuario(nombre=f.data["nombre"], apellido=f.data["apellido"], dni=f.data["dni"]).save()
-#          context['form'] = UsuarioForm()
-
-#     context["usuarios"] = Usuario.objects.all()
-#     context["total_usuarios"] = len(Usuario.objects.all())
-   
-#     return render(request, "AppCoder/usuarios.html", context)  
-
-    
 def cargar_articulos(request):
      f = ArticuloForm(request.POST)
      articulos = Articulo.objects.all()

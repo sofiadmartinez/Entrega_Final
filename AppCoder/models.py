@@ -23,5 +23,5 @@ class Envio(models.Model):
     ciudad = models.TextField(max_length=100, default=" ")
     provincia = models.TextField(max_length=100, default=" ")
     cp = models.TextField(max_length=100, default=" ")
-    def _str__(self):
+    def __str__(self):
         return f"{self.direccion} - {self.ciudad} - {self.provincia} - {self.cp}"

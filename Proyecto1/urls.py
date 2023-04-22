@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from AppCoder.views import (cargar_articulos, crear_usuario, envio_realizado, base)
+from AppCoder.views import (cargar_articulos, crear_usuario, envio_realizado, base, BuscarUsuarios)
 
 
 
@@ -25,5 +25,6 @@ urlpatterns = [
     path('articulos/create', cargar_articulos, name="articulos-create"),
     path('usuarios/create', crear_usuario, name="usuarios-create"),
     path('envios/create', envio_realizado, name="envios-create"),
+    path('usuarios/list', BuscarUsuarios.as_view(), name="usuarios-list" ), #importamos una clase no una funcion. as.view lo que hace es convertir una class review en una function review. que es lo que necesita para funcionar
     
     ]

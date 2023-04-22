@@ -18,3 +18,6 @@ class EnvioForm(forms.Form):
     cp =  forms.CharField(max_length=100, initial=" ")
     #fecha_ingreso = forms.DateField()
 
+class BuscarUsuariosForm(forms.Form):
+    criterio_nombre = forms.CharField(max_length=100)
+
